@@ -43,8 +43,6 @@ const items = [
 
 const carts = [];
 
-const list_item = document.querySelector("#list-item");
-
 // hàm tạo ra đoạn html của mỗi item
 function createItem(item) {
   let div_item = document.createElement("div");
@@ -63,6 +61,7 @@ function createItem(item) {
 }
 
 function renderListItem(data) {
+  const list_item = document.querySelector("#list-item");
   list_item.innerHTML = "";
   data.forEach(function (item, index) {
     const itemUI = createItem(item);
@@ -108,51 +107,27 @@ function handleClickAddToCart(button) {
   alert("Thêm vào giỏ hàng thành công!")
 }
 
-function run() {
+function handleLogout() {
+  localStorage.removeItem("isLogin");
+  window.location.href = "login.html"
+}
+
+function checkLogin() {
+  const isLogin =JSON.parse(localStorage.getItem("isLogin"));
+  console.log(isLogin)
+  if (!isLogin) {
+      window.location.href = "login.html"
+  }
+}
+
+window.onload = function() {
   renderListItem(items);
   search()
 }
 
-run();
+checkLogin();
 
-// map, filter dành cho mảng
-// map mảng a có n phần tử => mảng b có n phần từ (map có thể biến đối)
-// filter filter mảng a có n phần tử  => mảng b có m phần tử với n >=m (mmangr b giữ nguyen các giá trị cũ)
 
-const a = [1,5,9,2,5,0,4]
-
-// mảng b có các phần từ tương ứng gấp 3 lần cácn phần tử của mmangr a
-// b = [3,15,27,6,15,0,12]
-
-// cách 1
-let b1 = []
-
-for (let i = 0; i < a.length; i++) {
-  b1.push(a[i]*3)
-}
-console.log("cách 1", b1)
-
-// cách 2
-let b2 = a.map(function(item) {
-  return item*3
-})
-console.log("cách 2", b2)
-// tìm ra những số nhỏ hơn 6 trong mảng a
-
-let c1 = []
-
-for (let i = 0; i < a.length; i++) {
-  if (a[i] < 6) {
-    c1.push(a[i])
-  }
-}
-console.log("cách 1", c1)
-
-const c2 = a.filter(function(item) {
-  return item < 6
-})
-
-console.log("cách 2", c2)
 
 
 

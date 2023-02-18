@@ -13,6 +13,13 @@ function register() {
   });
 }
 
+function checkLogin() {
+  const isLogin = getDataLocalStorage("isLogin");
+  if (isLogin === true) {
+      window.location.href = "index.html"
+  }
+}
+
 function getDataLocalStorage(item) {
   return JSON.parse(localStorage.getItem(item)) || [];
 }
@@ -21,11 +28,12 @@ function setDataToLocalStorage(item, data) {
   localStorage.setItem(item, JSON.stringify(data));
 }
 
-function run() {
-  register();
+
+window.onload = function() {
+  login()
 }
 
-run();
+checkLogin()
 
 // Đổi tên file account.js => register.js
 // vào file register.html đổi src="account.js" thẻ script thành src="register.js"
