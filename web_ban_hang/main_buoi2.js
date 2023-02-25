@@ -125,7 +125,7 @@ window.onload = function() {
   search()
 }
 
-checkLogin();
+// checkLogin();
 
 
 
